@@ -16,20 +16,20 @@ The game last 100 shots. The winner is the one having the most ships at the end.
 
 Place yourself in the root of the project.
 Then execute the following command :
-'''
+```
 make
-'''
+```
 
 ## Play Battleship
 
 Being in the root of the project, execute the following command :
-'''
+```
 bin/Battleship
-'''
+```
 
 ## Uninstall Battleship
 
 Execute the command :
-'''
+```
 make distclean
-'''
+```
