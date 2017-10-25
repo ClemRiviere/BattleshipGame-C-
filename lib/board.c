@@ -29,10 +29,10 @@ void initBoard(int ** tab, int row, int col) {
    int j;
 
    /* Allocating memory */
-   maze->tab = (int **)malloc(sizeof(int *) * height);
+   tab = (int **)malloc(sizeof(int *) * row);
 
    for ( i=0; i<row ; i++ ) {
-       maze->tab[i] = (int *)malloc(sizeof(int) * width);
+       tab = (int *)malloc(sizeof(int) * col);
        for ( j=0; j<col; j++ ) {
 	       tab[i][j] = 0;
        }

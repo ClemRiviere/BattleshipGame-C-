@@ -1,9 +1,6 @@
 #include "../../include/boat.h"
-<<<<<<< HEAD
 #include "../../include/const.h"
-=======
 #include "../../lib/board.h"
->>>>>>> 0dd3ab00fabf42deaa302c2cdadc416d84cee0e2
 #include <CUnit/Basic.h>
 
 void test_init_boat(void){
@@ -16,7 +13,6 @@ void test_init_boat(void){
   CU_ASSERT(strcmp(boat.name,"bateau") == 0);
 }
 
-<<<<<<< HEAD
 void test_init_fleet(void){
   int i;
   Boat *fleet;
@@ -29,10 +25,10 @@ void test_init_fleet(void){
 
   CU_ASSERT(fleet[0].cells[4].val == 1);
   CU_ASSERT(fleet[2].cells[2].val == 1);
-=======
+
 void test_init_board(void) {
 
-  tab ** t;
+  int ** t;
   initBoard(t,10,10);
   CU_ASSERT( 0 == t[5][2] );
   CU_ASSERT( 0 == t[0][0] );
@@ -40,41 +36,40 @@ void test_init_board(void) {
 
 }
 
-void test_print_board() {
+void test_print_board(void) {
 
-  tab ** t;
+  int ** t;
   initBoard(t,10,10);
-  CU_ASSERT( printBoard(t,10,10) );
+  printBoard(t,10,10);
 
 }
 
-void test_put_value() {
+void test_put_value(void) {
   
-  tab ** t;
+  int ** t;
   initBoard(t,10,10);
-  CU_ASSERT( putValue(t,4,4,5) );
-  CU_ASSERT( putValue(t,10,10,2) );
-  CU_ASSERT( 5 == tab[4][4] );
+  putValue(t,4,4,5) );
+  putValue(t,10,10,2);
+  CU_ASSERT( 5 == t[4][4] );
 
 }
 
-void test_check_in_tab() {
+void test_check_in_tab(void) {
 
-  tab ** t;
+  int ** t;
   initBoard(t,10,10);
   
-  CU_ASSERT( checkInTab(t,2,2) );
-  CU_ASSERT( checkInTab(t,0,0) );
-  CU_ASSERT( checkInTab(t,15,15) );
+  CU_ASSERT( 1 == checkInTab(t,2,2) );
+  CU_ASSERT( 1 == checkInTab(t,0,0) );
+  CU_ASSERT( 0 == checkInTab(t,15,15) );
 }
 
-void test_free_board() {
+void test_free_board(void) {
 
   tab ** t;
   initBoard(t,10,10);
   
-  CU_ASSERT(freeBoard(t));
->>>>>>> 0dd3ab00fabf42deaa302c2cdadc416d84cee0e2
+  freeBoard(t);
 }
 
 int main(void){
