@@ -9,17 +9,17 @@
 #
 # Compile the mazeGame program.
 
-APP = 
-TEST = 
+APP = BattleShip
+TEST = Test_BattleShip
 
-MAIN_FILE = 
-TEST_FILE = 
+MAIN_FILE = main.c
 
 CC = gcc
 RM = rm
 RMFLAGS = -rf
 CPPFLAGS = -Wall -Wextra
 CCFLAGS = -ansi
+LDFLAGS = -lcunit -L/lib/CUnit/lib
 
 # All directories of files.
 INCLUDE_DIR = ./include
@@ -47,6 +47,8 @@ MAIN_SOURCE = $(SRC_DIR)/$(MAIN_FILE)
 MAIN_OBJECT := $(MAIN_SOURCE:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 TEST_SOURCES := $(wildcard $(TEST_SRC_DIR)/*.c)
+$(info SOURCES = $(TEST_SRC_DIR))
+$(info SOURCES = $(TEST_SOURCES))
 TEST_OBJECTS := $(TEST_SOURCES:$(TEST_SRC_DIR)/%.c=$(TEST_OBJ_DIR)/%.o)
 
 
@@ -54,7 +56,7 @@ TEST_OBJECTS := $(TEST_SOURCES:$(TEST_SRC_DIR)/%.c=$(TEST_OBJ_DIR)/%.o)
 .PHONY: all clean distclean docclean
 
 all: createObjectTree $(APP)
-test: createTestObjectTree $(TEST)
+test: createObjectTree createTestObjectTree $(TEST)
 
 
 $(APP): $(OBJECTS) $(MAIN_OBJECT)
@@ -105,4 +107,3 @@ doxysetup:
 
 doc: doxysetup createObjectTree $(APP)
 	-doxygen $(DOC_DIR)/$(DOXYFILE)
-
