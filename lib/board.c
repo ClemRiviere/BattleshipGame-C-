@@ -39,7 +39,7 @@ void initBoard(int ** tab, int row, int col) {
    } 
 }
 
-void printBoard(tab ** tab, int row, int col) {
+void printBoard(int ** tab, int row, int col) {
 
    int i;
    int j;
@@ -59,13 +59,13 @@ void printBoard(tab ** tab, int row, int col) {
       printf("-\n");
 }
 
-void putValue(tab ** tab, int l, int c, int value) {
+void putValue(int ** tab, int l, int c, int value) {
   if ( checkInTab(tab, l, c) ) {
     tab[l][c] = value;
   }
 }
 
-int checkInTab(tab ** tab, int l, int c) {
+int checkInTab(int ** tab, int l, int c) {
 
   int res = 1;
 
@@ -91,52 +91,4 @@ void freeBoard(int ** tab) {
   }
 
   free(tab);
-}
-
-
-
-void testInitBoard() {
-
-  tab ** t;
-  initBoard(t,10,10);
-  CU_ASSERT( 0 == t[5][2] );
-  CU_ASSERT( 0 == t[0][0] );
-  CU_ASSERT( 0 == t[9][9] );
-
-}
-
-void testPrintBoard() {
-
-  tab ** t;
-  initBoard(t,10,10);
-  CU_ASSERT( printBoard(t,10,10) );
-
-}
-
-void testPutValue() {
-  
-  tab ** t;
-  initBoard(t,10,10);
-  CU_ASSERT( putValue(t,4,4,5) );
-  CU_ASSERT( putValue(t,10,10,2) );
-  CU_ASSERT( 5 == tab[4][4] );
-
-}
-
-void testCheckInTab() {
-
-  tab ** t;
-  initBoard(t,10,10);
-  
-  CU_ASSERT( checkInTab(t,2,2) );
-  CU_ASSERT( checkInTab(t,0,0) );
-  CU_ASSERT( checkInTab(t,15,15) );
-}
-
-void testFreeBoard() {
-
-  tab ** t;
-  initBoard(t,10,10);
-  
-  CU_ASSERT(freeBoard(t));
 }
