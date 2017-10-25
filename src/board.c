@@ -1,13 +1,13 @@
-/* -*- c-basic-offset: 3 -*- 
+/* -*- c-basic-offset: 3 -*-
  *
  * ENSICAEN
- * 6 Boulevard Marechal Juin 
- * F-14050 Caen Cedex 
+ * 6 Boulevard Marechal Juin
+ * F-14050 Caen Cedex
  *
  * This file is owned by ENSICAEN students.
  * No portion of this document may be reproduced, copied
  * or revised without written permission of the authors.
- */ 
+ */
 
 /**
  * @author Clément LUCAS <jambo@baboune>
@@ -29,21 +29,21 @@ void initBoard(int ** tab, int row, int col) {
    int j;
 
    /* Allocating memory */
-   maze->tab = (int **)malloc(sizeof(int *) * height);
+   tab = (int **)malloc(sizeof(int *) * row);
 
    for ( i=0; i<row ; i++ ) {
-       maze->tab[i] = (int *)malloc(sizeof(int) * width);
+       tab[i] = (int *)malloc(sizeof(int) * col);
        for ( j=0; j<col; j++ ) {
 	       tab[i][j] = 0;
        }
-   } 
+   }
 }
 
 void printBoard(int ** tab, int row, int col) {
 
    int i;
    int j;
-   
+
    for ( i=0; i<row; i++ ) {
       for ( j=0; j<col; j++ ) {
         printf("---");
@@ -73,7 +73,7 @@ int checkInTab(int ** tab, int l, int c) {
     res = 0;
   }
 
-  if ( l>= sizeof(tab)/sizeof(tab[0]) || c>= sizeof(tab[0]) ) {
+  if ( l >= sizeof(tab)/sizeof(tab[0]) || c >= sizeof(tab[0]) ) {
     res = 0;
   }
 
