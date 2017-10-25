@@ -10,27 +10,26 @@
  */ 
 
 /**
- * @author Clément LUCAS
+ * @author Clément LUCAS <jambo@baboune>
  * @version 0.0.1 / 25-10-2017
  */
 
 /**
- * @file coup.h
+ * @file interface.h
  */
 
-#ifndef __INCLUDE_H
-#define __INCLUDE_H
+#ifndef __INTERFACE_H
+#define __INTERFACE_H
 
-#include "position.h"
 
-/**
- *  @brief Coup
- *
- * Defines an attemp of strike by the position
- */
-typedef struct{
-   Position p; /**< Position where to shoot */
-   int val; /**< Value of the shoot : 1 if touché, 0 otherwise */
-} Coup;
+
+/*
+-----------
+|   | x |
+-----------
+|   |   |   |
+---------------
+|   |   |   |
+*/
 
 #endif

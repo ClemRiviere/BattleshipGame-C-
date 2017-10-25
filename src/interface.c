@@ -10,26 +10,15 @@
  */ 
 
 /**
- * @author Clément LUCAS
+ * @author Clément LUCAS <jambo@baboune>
  * @version 0.0.1 / 25-10-2017
  */
 
 /**
- * @file position.h
+ * @file interface.c
+ * Library source that provides functions for displaying a table based game
  */
 
-#ifndef __POSITION_H
-#define __POSITION_H
-
-
-/**
- * @brief Position
- *
- * A position defined by x and y
- */
-typedef struct{
-   int x; /**< x value of the position */
-   int y; /**< y value of the position */
-} Position;
-
-#endif
+#include <stdio.h>
+#include <stdlib.h>
+#include <ncurses.h>
