@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/position.h"
+#include "../include/const.h"
 
 /**
   * @brief A cell of a boat.
