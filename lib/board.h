@@ -37,7 +37,7 @@ void initBoard(int ** tab, int row, int col);
  *  @param col the number of columns of the table
  * 	@return void
  */
-void printBoard(tab ** tab, int row, int col);
+void printBoard(int ** tab, int row, int col);
 
 /**
  *	Puts a value in the tab at the given position
@@ -48,7 +48,7 @@ void printBoard(tab ** tab, int row, int col);
  *  @param value the value to put in the table
  * 	@return void
  */
-void putValue(tab ** tab, int l, int c, int value);
+void putValue(int ** tab, int l, int c, int value);
 
 /**
  *	Checks if a position is in the tab
@@ -58,7 +58,7 @@ void putValue(tab ** tab, int l, int c, int value);
  *  @param col the index of the column in the table
  * 	@return 1 if true, else 0
  */
-int checkInTab(tab ** tab, int l, int c);
+int checkInTab(int ** tab, int l, int c);
 
 /**
  *	Frees the memory allocated for the board
