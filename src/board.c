@@ -83,11 +83,11 @@ int checkInTab(int ** tab, int l, int c, int row, int col) {
   return res;
 }
 
-void freeBoard(int ** tab, int row) {
+void freeBoard(int ** tab) {
 
   int i;
 
-  for ( i=0; i< row; i++ ) {
+  for ( i=0; i< sizeof(tab)/sizeof(tab[0]); i++ ) {
 
     free(tab[i]);
 
