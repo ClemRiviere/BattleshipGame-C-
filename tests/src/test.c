@@ -6,7 +6,7 @@
 
 /* TEST BOAT */
 
-void test_init_boat(void){
+void test_init_boat(void) {
   Boat boat;
   int i;
   initBoat(&boat, 3, "bateau");
@@ -16,7 +16,7 @@ void test_init_boat(void){
   CU_ASSERT(strcmp(boat.name,"bateau") == 0);
 }
 
-void test_init_fleet(void){
+void test_init_fleet(void) {
   int i;
   Boat *fleet;
   char *name[N_BOAT] = {"porte_avion","croiseur","contre_torpilleur","sous_marin","torpilleur"};
@@ -31,7 +31,6 @@ void test_init_fleet(void){
   CU_ASSERT(fleet[2].cells[2].val == 1);
 
 }
-
 
 /* TEST BOARD */
 
@@ -112,6 +111,39 @@ void test_free_board(void) {
 
 }
 
+void test_place_boat(void) {
+  Board board;
+  Boat *fleet;
+  Position pos;
+  int i;
+
+  initBoard(&board,10,10);
+  initFleet(&fleet);
+
+  pos.x = 1;
+  pos.y = 2;
+
+  CU_ASSERT ( placeBoat(&fleet[0],board,pos,R_HOR ) == 1 );
+  for ( i = 0; i < fleet[0].n_cells; i++ ) {
+    CU_ASSERT( fleet[0].cells[i].pos.x == pos.x+i );
+    CU_ASSERT( fleet[0].cells[i].pos.y == pos.y );
+  }
+
+  pos.x = 4;
+  pos.y = 4;
+
+  CU_ASSERT ( placeBoat(&fleet[1],board,pos,R_VERT ) == 1 );
+  for ( i = 0; i < fleet[1].n_cells; i++ ) {
+    CU_ASSERT( fleet[1].cells[i].pos.x == pos.x );
+    CU_ASSERT( fleet[1].cells[i].pos.y == pos.y+i );
+  }
+
+  pos.x = 8;
+  pos.y = 2;
+  CU_ASSERT ( placeBoat(&fleet[2],board,pos,R_HOR) == 0 );
+
+}
+
 int main(void){
   CU_initialize_registry();
 
@@ -120,6 +152,7 @@ int main(void){
   boat_test = CU_add_suite("boat_test", 0, 0);
   CU_add_test(boat_test, "init_boat", test_init_boat);
   CU_add_test(boat_test, "init_fleet",test_init_fleet);
+  CU_add_test(boat_test, "place_boat",test_place_boat);
   CU_basic_set_mode(CU_BRM_VERBOSE);
   CU_basic_run_tests();
 

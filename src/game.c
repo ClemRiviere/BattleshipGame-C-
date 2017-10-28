@@ -45,13 +45,13 @@ void setUpPlayerFleet( Board *board, int n ) {
       system("clear");
       printf("Player fleet : set your boats ! \n");
       printBoard(*board);
-      
+
       x = askInt("x value ? : ");
       y = askInt("y value ? : ");
-
+      
       if ( checkInTab( *board, y, x) && !board->tab[y][x] ) {
-	 putValue( board, y, x, 1 );
-	 i++ ;
+	       putValue( board, y, x, 1 );
+	       i++ ;
       }
    }
 
@@ -65,23 +65,23 @@ void setUpComputerFleet( Board *board, int n ) {
    int y ;
 
    while ( i < n ) {
-      
+
       x = rand()%board->col;
       y = rand()%board->row;
 
       if ( checkInTab( *board, y, x) && !board->tab[y][x] ) {
-	 putValue( board, y, x, 1 );
-	 i++ ;
+	       putValue( board, y, x, 1 );
+	       i++ ;
       }
    }
-   
+
 }
 
 void initGame(Board *player, Board *computer) {
 
    setUpPlayerFleet(player, NBOATCELLS);
    setUpComputerFleet(computer, NBOATCELLS);
-   
+
 }
 
 void printGame(Board *player, Board * computer) {
@@ -93,6 +93,5 @@ void printGame(Board *player, Board * computer) {
 
    printf("Computer fleet : \n");
    printBoard(*computer);
-   
+
 }
-      

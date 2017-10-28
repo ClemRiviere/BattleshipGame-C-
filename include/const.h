@@ -4,3 +4,6 @@
 #define N_CONTRE_TORPILLEUR 3
 #define N_SOUS_MARIN 3
 #define N_TORPILLEUR 2
+
+#define R_HOR 0
+#define R_VERT 1

@@ -34,6 +34,7 @@
 #include <string.h>
 #include "../include/position.h"
 #include "../include/const.h"
+#include "../lib/include/board.h"
 
 /**
   * @brief A cell of a boat.
@@ -41,8 +42,8 @@
   * The position of the boat cell and it's value.
   */
 typedef struct {
-	Position pos;	/**< The position of the cell */
-	int val;		/**< The value of the cell (destroyed or not destroyed) */
+	Position pos;		/**< The position of the cell */
+	int val;				/**< The value of the cell (destroyed or not destroyed) */
 }Boat_cell;
 
 /**
@@ -51,8 +52,9 @@ typedef struct {
   * Cells of a boat and it's name.
   */
 typedef struct {
+	int n_cells; 			/**< The number of boat cells */
 	Boat_cell *cells;	/**< The boat cells */
-	char *name;			/**< The boat name */
+	char *name;				/**< The boat name */
 }Boat;
 
 /**
@@ -77,8 +79,9 @@ void initFleet(Boat **fleet);
  * @param boat the boat that needs to be modified.
  * @param pos the new position of the boat.
  * @param r the orientation of the boat.
+ * @return int if the boat have been placed.
  */
-void placeBoat(Boat *boat, Position pos, int r);
+int placeBoat(Boat *boat, Board board, Position pos, int r);
 
 /**
  * Opponent missile process

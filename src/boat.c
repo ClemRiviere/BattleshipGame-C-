@@ -28,6 +28,7 @@
 void initBoat(Boat *boat, int n_cells, char *name) {
   int i;
   boat->cells = (Boat_cell *)malloc(sizeof(Boat_cell)*n_cells);
+  boat->n_cells = n_cells;
   for (i = 0; i < n_cells; i++) {
     boat->cells[i].val = 1;
   }
@@ -48,6 +49,32 @@ void initFleet(Boat **fleet){
   }
 }
 
-/*void placeBoat(Boat *boat, Position pos, int r){
+int placeBoat(Boat *boat, Board board, Position pos, int r) {
+  int i;
 
-}*/
+  if ( r == R_HOR ){
+    if ( pos.x + boat->n_cells > board.row-1 ) {
+      return 0;
+    }
+    else {
+      for ( i = 0; i < boat->n_cells; i++ ) {
+        boat->cells[i].pos.x = pos.x + i;
+        boat->cells[i].pos.y = pos.y;
+      }
+      return 1;
+    }
+  }
+  else {
+    if ( pos.y + boat->n_cells > board.col-1 ) {
+      return 0;
+    }
+    else {
+      for ( i = 0; i < boat->n_cells; i++ ) {
+        boat->cells[i].pos.x = pos.x;
+        boat->cells[i].pos.y = pos.y + i;
+      }
+      return 1;
+    }
+  }
+  return 0;
+}

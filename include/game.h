@@ -27,6 +27,7 @@
 #include <stdlib.h>
 #include "../lib/include/board.h"
 #include "../include/boat.h"
+#include "../include/position.h"
 
 /**
  * Asks the user for an int. Prints a message first.
@@ -57,9 +58,9 @@ void setUpPlayerFleet(Board *board, int n) ;
 void setUpComputerFleet(Board *board, int n) ;
 
 /**
- * Initializes the the game : asks the player for the position of his boats, generate the board of the computer and prints 
+ * Initializes the the game : asks the player for the position of his boats, generate the board of the computer and prints
  * the result.
- * 
+ *
  * @param player the board of the player
  * @param computer the board of the computer
  * @return void
