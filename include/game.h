@@ -23,7 +23,7 @@
 #define __GAME_H
 
 #include <board.h>
-#include "boat.h"
+#include "../include/boat.h"
 
 /**
  * Asks the user for an int. Prints a message first.

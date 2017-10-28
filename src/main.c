@@ -22,8 +22,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "game.h"
-#include <board.h>
+#include <game.h>
+#include "board.h"
 
 
 int main(void) {
