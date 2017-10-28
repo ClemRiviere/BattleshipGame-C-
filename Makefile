@@ -11,15 +11,22 @@
 
 APP = BattleShip
 TEST = Test_BattleShip
-
+LIB = board
 MAIN_FILE = main.c
 
 CC = gcc
 RM = rm
 RMFLAGS = -rf
 CFLAGS = -Wall -Wextra -ansi
-LDFLAGS = -lm
-LDFLAGS_TEST = -lcunit -L/lib/CUnit/lib
+AR = ar
+ARFLAGS = crv
+LDFLAGS_DYN = -L$(LIB_BIN_DIR) -dynamic -l$(LIB)
+LDFLAGS_STAT = -L$(LIB_BIN_DIR) -static -l$(LIB)
+LDFLAGS_TEST = -L/lib/CUnit/lib -lcunit -L$(LIB_BIN_DIR) -dynamic -l$(LIB)
+
+LIB_DYN = lib$(LIB).so
+LIB_STAT = lib$(LIB).a
+APP_STAT = $(APP)_STATIC
 
 # All directories of files.
 INCLUDE_DIR = ./include
@@ -61,15 +68,27 @@ LIB_OBJECTS := $(LIB_SOURCES:$(LIB_SRC_DIR)/%.c=$(LIB_OBJ_DIR)/%.o)
 
 .PHONY: all clean distclean docclean
 
-all: createObjectTree $(APP)
+all: createObjectTree createLibObjectTree $(LIB_DYN) $(APP)
+
+stat: createObjectTree createLibObjectTree $(LIB_STAT) $(APP_STAT)
+
 test: createObjectTree createTestObjectTree createLibObjectTree $(TEST)
 
 
 $(APP): $(OBJECTS) $(MAIN_OBJECT)
-	$(CC) $^ -o $(BIN_DIR)/$@ $(LDFLAGS)
+	$(CC) $^ -o $(BIN_DIR)/$@ $(LDFLAGS_DYN)
 
-$(TEST): $(OBJECTS) $(TEST_OBJECTS) $(LIB_OBJECTS)
+$(APP_STAT): $(OBJECTS) $(MAIN_OBJECT)
+	$(CC) $^ -o $(BIN_DIR)/$@ $(LDFLAGS_STAT)
+
+$(TEST): $(OBJECTS) $(TEST_OBJECTS)
 	$(CC) $^ -o $(BIN_DIR)/$@ $(LDFLAGS_TEST)
+
+$(LIB_DYN) : $(LIB_OBJECTS)
+	$(CC) -shared $^ -o $(LIB_BIN_DIR)/$@
+
+$(LIB_STAT) : $(LIB_OBJECTS)
+	$(AR) $(ARFLAGS) $(LIB_BIN_DIR)/$@ $^
 
 createObjectTree:
 	mkdir -p $(OBJ_DIR)
@@ -92,7 +111,7 @@ $(TEST_OBJECTS) : $(TEST_OBJ_DIR)/%.o: $(TEST_SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(LIB_OBJECTS) : $(LIB_OBJ_DIR)/%.o: $(LIB_SRC_DIR)/%.c $(LIB_INCLUDE_DIR)/%.h
-	$(CC) $(CFLAGS) -c -I $(LIB_INCLUDE_DIR) -o $@ $<
+	$(CC) $(CFLAGS) -c -fpic -I $(LIB_INCLUDE_DIR) -o $@ $<
 
 
 clean:
@@ -102,8 +121,11 @@ clean:
 
 distclean: clean
 	$(RM) $(RMFLAGS) $(BIN_DIR)/$(APP)
+	$(RM) $(RMFLAGS) $(BIN_DIR)/$(APP_STAT)
 	$(RM) $(RMFLAGS) $(DOC_DIR)/$(DOXYFILE)
 	$(RM) $(RMFLAGS) $(BIN_DIR)/$(TEST)
+	$(RM) $(RMFLAGS) $(LIB_BIN_DIR)/$(LIB_DYN)
+	$(RM) $(RMFLAGS) $(LIB_BIN_DIR)/$(LIB_STAT)
 
 docclean:
 	$(RM) $(RMFLAGS) $(DOC_DIR)/*
