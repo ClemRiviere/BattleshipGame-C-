@@ -37,8 +37,7 @@ int main(void) {
    int width;
    int height;
 
-   int nbBoatCells = 3;
-
+   system("clear");
    width = askInt("Width of the board ? : ");
    height = askInt("Height of the board ? : ");
 
@@ -46,19 +45,13 @@ int main(void) {
    initBoard(&player_shoot, width, height);
    initBoard(&computer_fleet, width, height);
    initBoard(&computer_shoot, width, height);
-
+   
    /* Game */
-   printf("Player fleet : \n");
-
-   setUpPlayerFleet(&player_fleet,nbBoatCells);
-   printBoard(player_fleet);
-
-   printf("Computer fleet : \n");
-   setUpComputerFleet(&computer_fleet,nbBoatCells);
-   printBoard(computer_fleet);
-
+   initGame( &player_fleet, &computer_fleet );
+   
    /* Print the result */
-
+   printGame( &player_fleet, &computer_fleet );
+   
    /* Play again ?*/
 
    return EXIT_SUCCESS;

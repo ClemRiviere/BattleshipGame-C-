@@ -55,4 +55,24 @@ void setUpPlayerFleet(Board *board, int n) ;
  */
 void setUpComputerFleet(Board *board, int n) ;
 
+/**
+ * Initializes the the game : asks the player for the position of his boats, generate the board of the computer and prints 
+ * the result.
+ * 
+ * @param player the board of the player
+ * @param computer the board of the computer
+ * @return void
+ */
+void initGame(Board *player, Board *computer) ;
+
+/**
+ * Prints two boards. This function can be used also as a debugging tool : you can choose either to print the data (secret) boards
+ * or the public boards.
+ *
+ * @param player the board of the player
+ * @param computer the board of the computer
+ * @return void
+ */
+void printGame(Board *player, Board *computer);
+
 #endif

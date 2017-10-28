@@ -21,6 +21,8 @@
 
 #include "../include/game.h"
 
+#define NBOATCELLS 5
+
 int askInt( char * message ) {
 
    int res;
@@ -39,6 +41,10 @@ void setUpPlayerFleet( Board *board, int n ) {
 
    while ( i < n ) {
 
+      system("clear");
+      printf("Player fleet : set your boats ! \n");
+      printBoard(*board);
+      
       x = askInt("x value ? : ");
       y = askInt("y value ? : ");
 
@@ -58,7 +64,7 @@ void setUpComputerFleet( Board *board, int n ) {
    int y ;
 
    while ( i < n ) {
-
+      
       x = rand()%board->col;
       y = rand()%board->row;
 
@@ -67,5 +73,25 @@ void setUpComputerFleet( Board *board, int n ) {
 	 i++ ;
       }
    }
-
+   
 }
+
+void initGame(Board *player, Board *computer) {
+
+   setUpPlayerFleet(player, NBOATCELLS);
+   setUpComputerFleet(computer, NBOATCELLS);
+   
+}
+
+void printGame(Board *player, Board * computer) {
+
+   system("clear");
+
+   printf("Player fleet : \n");
+   printBoard(*player);
+
+   printf("Computer fleet : \n");
+   printBoard(*computer);
+   
+}
+      
