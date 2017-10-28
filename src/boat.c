@@ -47,6 +47,6 @@ void initFleet(Boat **fleet){
   }
 }
 
-void placeBoat(Boat *boat, Position pos, int r){
+/*void placeBoat(Boat *boat, Position pos, int r){
 
-}
+}*/

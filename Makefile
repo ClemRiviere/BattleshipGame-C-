@@ -17,9 +17,9 @@ MAIN_FILE = main.c
 CC = gcc
 RM = rm
 RMFLAGS = -rf
-CPPFLAGS = -Wall -Wextra
-CCFLAGS = -ansi
-LDFLAGS = -lcunit -L/lib/CUnit/lib
+CFLAGS = -Wall -Wextra -ansi
+LDFLAGS = -lm
+LDFLAGS_TEST = -lcunit -L/lib/CUnit/lib
 
 # All directories of files.
 INCLUDE_DIR = ./include
@@ -28,11 +28,16 @@ LIB_DIR = ./lib
 BIN_DIR = ./bin
 DOC_DIR = ./doc
 OBJ_DIR = ./src/obj
-
 TEST_DIR = ./tests
+
 TEST_SRC_DIR = $(TEST_DIR)/$(SRC_DIR)
 TEST_OBJ_DIR = $(TEST_DIR)/$(OBJ_DIR)
 TEST_BIN_DIR = $(TEST_DIR)/$(BIN_DIR)
+
+LIB_SRC_DIR = $(LIB_DIR)/$(SRC_DIR)
+LIB_OBJ_DIR = $(LIB_DIR)/$(OBJ_DIR)
+LIB_BIN_DIR = $(LIB_DIR)/$(BIN_DIR)
+LIB_INCLUDE_DIR = $(LIB_DIR)/$(INCLUDE_DIR)
 
 DOXYFILE = doxyfile
 HTML = YES
@@ -47,23 +52,24 @@ MAIN_SOURCE = $(SRC_DIR)/$(MAIN_FILE)
 MAIN_OBJECT := $(MAIN_SOURCE:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 TEST_SOURCES := $(wildcard $(TEST_SRC_DIR)/*.c)
-$(info SOURCES = $(TEST_SRC_DIR))
-$(info SOURCES = $(TEST_SOURCES))
 TEST_OBJECTS := $(TEST_SOURCES:$(TEST_SRC_DIR)/%.c=$(TEST_OBJ_DIR)/%.o)
+
+LIB_SOURCES := $(wildcard $(LIB_SRC_DIR)/*.c)
+LIB_OBJECTS := $(LIB_SOURCES:$(LIB_SRC_DIR)/%.c=$(LIB_OBJ_DIR)/%.o)
 
 
 
 .PHONY: all clean distclean docclean
 
 all: createObjectTree $(APP)
-test: createObjectTree createTestObjectTree $(TEST)
+test: createObjectTree createTestObjectTree createLibObjectTree $(TEST)
 
 
 $(APP): $(OBJECTS) $(MAIN_OBJECT)
 	$(CC) $^ -o $(BIN_DIR)/$@ $(LDFLAGS)
 
-$(TEST): $(OBJECTS) $(TEST_OBJECTS)
-	$(CC) $^ -o $(BIN_DIR)/$@ $(LDFLAGS)
+$(TEST): $(OBJECTS) $(TEST_OBJECTS) $(LIB_OBJECTS)
+	$(CC) $^ -o $(BIN_DIR)/$@ $(LDFLAGS_TEST)
 
 createObjectTree:
 	mkdir -p $(OBJ_DIR)
@@ -71,20 +77,28 @@ createObjectTree:
 createTestObjectTree:
 	mkdir -p $(TEST_OBJ_DIR)
 
+createLibObjectTree:
+	mkdir -p $(LIB_OBJ_DIR)
+
 #Dependencies
 
 $(OBJECTS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INCLUDE_DIR)/%.h
-	$(CC) $(CPPFLAGS) $(CCFLAGS) -c -I $(INCLUDE_DIR) -o $@ $<
+	$(CC) $(CFLAGS) -c -I $(INCLUDE_DIR) -o $@ $<
 
 $(MAIN_OBJECT) : $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CPPFLAGS) $(CCFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(TEST_OBJECTS) : $(TEST_OBJ_DIR)/%.o: $(TEST_SRC_DIR)/%.c
-	$(CC) $(CPPFLAGS) $(CCFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(LIB_OBJECTS) : $(LIB_OBJ_DIR)/%.o: $(LIB_SRC_DIR)/%.c $(LIB_INCLUDE_DIR)/%.h
+	$(CC) $(CFLAGS) -c -I $(LIB_INCLUDE_DIR) -o $@ $<
 
 
 clean:
 	$(RM) $(RMFLAGS) $(OBJ_DIR)
+	$(RM) $(RMFLAGS) $(TEST_OBJ_DIR)
+	$(RM) $(RMFLAGS) $(LIB_OBJ_DIR)
 
 distclean: clean
 	$(RM) $(RMFLAGS) $(BIN_DIR)/$(APP)
