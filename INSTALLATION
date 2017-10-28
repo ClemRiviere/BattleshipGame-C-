@@ -1,0 +1,25 @@
+## Install BattleShip
+
+Execute :
+'''
+make
+'''
+
+## Uninstall
+
+Execute :
+'''
+make distclean
+'''
+
+## Doc
+
+create documentation :
+'''
+make doc
+'''
+
+delete documentation :
+'''
+make docclean
+'''
