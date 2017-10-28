@@ -18,7 +18,8 @@ void test_init_fleet(void){
   Boat *fleet;
   char *name[N_BOAT] = {"porte_avion","croiseur","contre_torpilleur","sous_marin","torpilleur"};
 
-  initFleet(fleet);
+  initFleet(&fleet);
+
   for (i=0;i<N_BOAT;i++){
     CU_ASSERT(strcmp(fleet[i].name,name[i]) == 0);
   }
@@ -79,11 +80,11 @@ int main(void){
   /* Suite test boat */
   CU_pSuite suite_test = CU_add_suite("test_suite", 0, 0);
   CU_add_test(suite_test, "init_boat", test_init_boat);
-  /*CU_add_test(suite_test, "init_fleet",test_init_fleet);*/
+  CU_add_test(suite_test, "init_fleet",test_init_fleet);
   CU_basic_set_mode(CU_BRM_VERBOSE);
   CU_basic_run_tests();
 
-  /* Suite test lib Board */
+  /* Suite test lib Board
   CU_pSuite test_board= CU_add_suite("test_suite", 0, 0);
   CU_add_test(test_board, "init_board", test_init_boat);
   CU_add_test(test_board, "print_board", test_print_board);
@@ -91,7 +92,7 @@ int main(void){
   CU_add_test(test_board, "check_in_tab", test_check_in_tab);
   CU_add_test(test_board, "free_board", test_free_board);
   CU_basic_set_mode(CU_BRM_VERBOSE);
-  CU_basic_run_tests();
+  CU_basic_run_tests();*/
 
   CU_cleanup_registry();
   return 0;

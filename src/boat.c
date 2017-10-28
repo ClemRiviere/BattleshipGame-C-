@@ -34,13 +34,19 @@ void initBoat(Boat *boat, int n_cells, char *name) {
   strcpy(boat->name,name);
 }
 
-void initFleet(Boat *fleet){
+void initFleet(Boat **fleet){
   int i;
+
+  *fleet = (Boat *)malloc(sizeof(Boat)*N_BOAT);
+
   int tab_n_cases[N_BOAT] = {N_PORTE_AVION,N_CROISEUR,N_CONTRE_TORPILLEUR,N_SOUS_MARIN,N_TORPILLEUR};
   char *tab_name[N_BOAT] = {"porte_avion","croiseur","contre_torpilleur","sous_marin","torpilleur"};
-  fleet = (Boat *)malloc(sizeof(Boat)*N_BOAT);
 
   for (i = 0; i < N_BOAT; i++) {
-    initBoat(&fleet[i], tab_n_cases[i], tab_name[i]);
+    initBoat(&(*fleet)[i], tab_n_cases[i], tab_name[i]);
   }
+}
+
+void placeBoat(Boat *boat, Position pos, int r){
+
 }

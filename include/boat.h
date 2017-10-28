@@ -68,7 +68,7 @@ void initBoat(Boat *boat, int n_cells, char *name);
  *
  * @param fleet a boat tab representing a fleet.
  */
-void initFleet(Boat *fleet);
+void initFleet(Boat **fleet);
 
 /**
  * Set the position of a boat
@@ -77,7 +77,7 @@ void initFleet(Boat *fleet);
  * @param pos the new position of the boat.
  * @param r the orientation of the boat.
  */
-void placeBoat(Boat boat, Position pos, int r);
+void placeBoat(Boat *boat, Position pos, int r);
 
 /**
  * Opponent missile process
