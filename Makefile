@@ -20,9 +20,9 @@ RMFLAGS = -rf
 CFLAGS = -Wall -Wextra -ansi
 AR = ar
 ARFLAGS = crv
-LDFLAGS_DYN = -L$(LIB_BIN_DIR) -dynamic -l$(LIB)
+LDFLAGS_DYN = -L$(LIB_BIN_DIR) -Wl,-rpath=$(LIB_BIN_DIR) -dynamic -l$(LIB)
 LDFLAGS_STAT = -L$(LIB_BIN_DIR) -static -l$(LIB)
-LDFLAGS_TEST = -L/lib/CUnit/lib -lcunit -L$(LIB_BIN_DIR) -dynamic -l$(LIB)
+LDFLAGS_TEST = -L/lib/CUnit/lib -lcunit -L$(LIB_BIN_DIR) -Wl,-rpath=$(LIB_BIN_DIR) -dynamic -l$(LIB)
 
 LIB_DYN = lib$(LIB).so
 LIB_STAT = lib$(LIB).a
@@ -72,7 +72,7 @@ all: createObjectTree createLibObjectTree $(LIB_DYN) $(APP)
 
 stat: createObjectTree createLibObjectTree $(LIB_STAT) $(APP_STAT)
 
-test: createObjectTree createTestObjectTree createLibObjectTree $(TEST)
+test: createObjectTree createTestObjectTree createLibObjectTree $(LIB_DYN) $(TEST)
 
 
 $(APP): $(OBJECTS) $(MAIN_OBJECT)
