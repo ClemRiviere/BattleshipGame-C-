@@ -10,8 +10,8 @@
  */
 
 /**
- * @author Clément LUCAS
- * @author Clément RIVIERE
+ * @author Clément Rivière <criviere@ecole.ensicaen.fr>
+ * @author Clément Lucas <clement.lucas@ecole.ensicaen.fr>
  * @version 0.0.1 / 25-10-2017
  */
 

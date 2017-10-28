@@ -10,7 +10,8 @@
  */
 
 /**
- * @author Clément LUCAS <jambo@baboune>
+ * @author Clément Rivière <criviere@ecole.ensicaen.fr>
+ * @author Clément Lucas <clement.lucas@ecole.ensicaen.fr>
  * @version 0.0.1 / 28-10-2017
  */
 

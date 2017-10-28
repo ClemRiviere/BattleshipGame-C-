@@ -10,6 +10,7 @@
  */
 /**
  * @author Clément Rivière <criviere@ecole.ensicaen.fr>
+ * @author Clément Lucas <clement.lucas@ecole.ensicaen.fr>
  * @version 0.0.1 - 25-10-2017
  *
  * @todo the list of improvements suggested for the file.
