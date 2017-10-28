@@ -22,16 +22,41 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "game.h"
+#include <board.h>
 
 
 int main(void) {
-
-   /* Print the two plates */
-
+   
    /* Initialize the game*/
+   Board player_fleet;
+   Board player_shoot;
+   Board computer_fleet;
+   Board computer_shoot;
+
+   int width;
+   int height;
+
+   int nbBoatCells = 3;
+   
+   width = askInt("Width of the board ? : ");
+   height = askInt("Height of the maze ? : ");
+
+   initBoard(&player_fleet, width, height);
+   initBoard(&player_shoot, width, height);
+   initBoard(&computer_fleet, width, height);
+   initBoard(&computer_shoot, width, height);
 
    /* Game */
-
+   printf("Player fleet : \n");
+   
+   setUpPlayerFleet(&player_fleet,nbBoatCells);
+   printBoard(player_fleet);
+   
+   printf("Computer fleet : \n");
+   setUpComputerFleet(&computer_fleet,nbBoatCells);
+   printBoard(computer_fleet);
+   
    /* Print the result */
 
    /* Play again ?*/
